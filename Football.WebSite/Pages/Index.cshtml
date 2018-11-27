@@ -1,0 +1,46 @@
+﻿@page
+@model Football.WebSite.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <h2>Competition Information</h2>
+    <br />
+</div>
+
+<div class="row">
+    <form asp-controller="Index" method="POST">
+        <div class="container">
+            <div class="col-lg-6 col-md-9 col-sm-9 col-xs-12">
+                <div class="col-md-6 col-sm-9 col-xs-9">
+                    <input type="text" class="form-control" placeholder="Competition Number" aria-label="Competition Number" aria-describedby="competitionNumber" asp-for="CompetitionNumber" />
+                    <span asp-validation-for="CompetitionNumber" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <button type="submit" class="btn btn-primary" placeholder="Search">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        @{ if (!String.IsNullOrEmpty(Model?.LeagueTable?.LeagueCaption))
+            {
+                <br />
+                <h4 class="alert alert-success">@(Model.LeagueTable.LeagueCaption)</h4>
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(Model.CompetitionNumber))
+                {
+                    <h4 class="alert alert-warning">Competition not found.</h4>
+                }
+            }
+        }
+    </div>
+
+    <div class="row">
+        <partial name="_LeagueRanking" for="LeagueTable" />
+    </div>
+</div>
