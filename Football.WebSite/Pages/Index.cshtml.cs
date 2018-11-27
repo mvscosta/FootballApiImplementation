@@ -10,11 +10,11 @@ namespace Football.WebSite.Pages
     public class IndexModel : PageModel
     {
         [BindProperty]
-        [Required(ErrorMessage = "Competition Number is required")]
+        [Required(ErrorMessage = "Número da Competição é obrigatório")]
         public string CompetitionNumber { get; set; }
 
         [BindProperty]
-        public ILeagueTable LeagueTable { get; private set; }
+        public LeagueTable LeagueTable { get; private set; }
 
         public async Task<IActionResult> OnGetAsync(string competitionNumber)
         {
@@ -36,7 +36,7 @@ namespace Football.WebSite.Pages
         }
 
 
-        private async Task<ILeagueTable> SearchLeagueTable(string competitionNumber)
+        private async Task<LeagueTable> SearchLeagueTable(string competitionNumber)
         {
             if (!string.IsNullOrEmpty(competitionNumber))
             {
